@@ -1,4 +1,4 @@
-/**
+/*
 * @license Apache-2.0
 *
 * Copyright (c) 2026 The Stdlib Authors.
@@ -16,19 +16,11 @@
 * limitations under the License.
 */
 
-'use strict';
+// TypeScript Version: 4.1
 
-// MODULES //
+/// <reference types="https://cdn.jsdelivr.net/gh/stdlib-js/types@main/index.d.ts"/>
 
-var numelDimension = require( '@stdlib/ndarray-base-numel-dimension' );
-var getStride = require( '@stdlib/ndarray-base-stride' );
-var getOffset = require( '@stdlib/ndarray-base-offset' );
-var getData = require( '@stdlib/ndarray-base-data-buffer' );
-var strided = require( '@stdlib/blas-ext-base-gxsa' ).ndarray;
-var ndarraylike2scalar = require( '@stdlib/ndarray-base-ndarraylike2scalar' );
-
-
-// MAIN //
+import { typedndarray } from '@stdlib/types/ndarray';
 
 /**
 * Subtracts a scalar constant from each element in a one-dimensional ndarray.
@@ -40,8 +32,8 @@ var ndarraylike2scalar = require( '@stdlib/ndarray-base-ndarraylike2scalar' );
 *     -   a one-dimensional input ndarray.
 *     -   a zero-dimensional ndarray containing the scalar constant to subtract.
 *
-* @param {ArrayLikeObject<Object>} arrays - array-like object containing ndarrays
-* @returns {ndarray} input ndarray
+* @param arrays - array-like object containing ndarrays
+* @returns input ndarray
 *
 * @example
 * var vector = require( '@stdlib/ndarray-vector-ctor' );
@@ -56,17 +48,9 @@ var ndarraylike2scalar = require( '@stdlib/ndarray-base-ndarraylike2scalar' );
 * var out = gxsa( [ x, alpha ] );
 * // returns <ndarray>[ -7.0, -4.0, -2.0, -10.0 ]
 */
-function gxsa( arrays ) {
-	var alpha;
-	var x;
-
-	x = arrays[ 0 ];
-	alpha = ndarraylike2scalar( arrays[ 1 ] );
-	strided( numelDimension( x, 0 ), alpha, getData( x ), getStride( x, 0 ), getOffset( x ) ); // eslint-disable-line max-len
-	return x;
-}
+declare function gxsa<T extends typedndarray<number> = typedndarray<number>>( arrays: [ T, typedndarray<number> ] ): T;
 
 
 // EXPORTS //
 
-module.exports = gxsa;
+export = gxsa;
